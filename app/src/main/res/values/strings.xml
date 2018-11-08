@@ -1,3 +1,6 @@
 <resources>
     <string name="open_list">Open list</string>
+  <string name="open_scroll_screen">Open scroll screen</string>
+  <string name="item_to_scroll_to">Item to scroll to</string>
+  <string name="item_not_to_scroll_to">Item not to scroll to</string>
 </resources>

@@ -7,22 +7,8 @@ import android.graphics.Rect
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
-import androidx.test.uiautomator.By
-import androidx.test.uiautomator.BySelector
-import androidx.test.uiautomator.UiDevice
-import androidx.test.uiautomator.UiObject
-import androidx.test.uiautomator.UiObjectNotFoundException
-import androidx.test.uiautomator.UiSelector
-import de.codecentric.androidtestktx.common.appContext
-import de.codecentric.androidtestktx.common.bottomPoint
-import de.codecentric.androidtestktx.common.instrumentation
-import de.codecentric.androidtestktx.common.leftPoint
-import de.codecentric.androidtestktx.common.nameOf
-import de.codecentric.androidtestktx.common.originalPackageName
-import de.codecentric.androidtestktx.common.resource
-import de.codecentric.androidtestktx.common.seconds
-import de.codecentric.androidtestktx.common.stringOf
-import de.codecentric.androidtestktx.common.toSeconds
+import androidx.test.uiautomator.*
+import de.codecentric.androidtestktx.common.*
 import org.junit.Assert
 import kotlin.reflect.KClass
 
@@ -125,8 +111,8 @@ infix fun UiObject.descendantById(@IdRes viewId: Int): UiObject {
  * UIObject extension function which sugars the assertion.
  *
  */
-infix fun UiObject.verifyThat(assertFun: (UiObject).() -> Unit) {
-  assertFun(this)
+infix fun UiObject.verifyThat(assertFun: UiObject.() -> Unit) {
+  assertFun()
 }
 
 /**

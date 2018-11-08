@@ -16,6 +16,7 @@ fun UiObject.itIsDisplayed() {
   assertTrue(exists())
 }
 
+
 /**
  * Asserts whether the UIObject is not displayed on the screen
  */

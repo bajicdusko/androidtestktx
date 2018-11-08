@@ -36,7 +36,7 @@ class KTXUIAutomatorDemo {
   @Test
   fun shouldOpenListScreen() {
     withMainUIAutomatorRobot {
-      openList()
+      openScrollScreen()
     } verifyThat {
       listScreenIsOpened()
     }
@@ -70,6 +70,18 @@ class KTXUIAutomatorDemo {
       replaceTextInField()
     } verifyThat {
       textIsEnteredCorrectly(REPLACE_TEXT)
+    }
+  }
+
+
+  @Test
+  fun shouldScrollToView() {
+    withMainUIAutomatorRobot {
+      openScrollScreen()
+    } andThen {
+      scrollToTheTextOnTheBottom()
+    } verifyThat {
+      textOnTheBottomIsVisible()
     }
   }
 

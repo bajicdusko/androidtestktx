@@ -68,6 +68,30 @@ fun replaceText(textToInput: String): ViewAction = ViewActions.replaceText(textT
 fun Matcher<View>.scroll(): ViewInteraction = Espresso.onView(this).perform(ViewActions.swipeUp())
 
 /**
+ * Extension function for performing a [ViewActions.scrollTo] on [matcher] argument
+ */
+fun scrollTo(matcher: Matcher<View>) {
+  onView(matcher).perform(ViewActions.scrollTo())
+}
+
+/**
+ * Extension function for performing a [ViewActions.scrollTo] on View found by id.
+ */
+fun scrollTo(viewId: Int) = scrollTo(viewById(viewId))
+
+/**
+ * Extension function for performing a [ViewActions.scrollTo] on view found by text
+ */
+fun scrollTo(text: String) = scrollTo(viewByText(text))
+
+/**
+ * Extension function which scrolls a currently matched RecyclerView.
+ */
+fun <VH : RecyclerView.ViewHolder> Matcher<View>.scrollToPosition(position: Int) {
+  onView(this).perform(RecyclerViewActions.scrollToPosition<VH>(position))
+}
+
+/**
  * Extension function for performing a scrollUp on a current [Matcher].
  * Scrolling is implemented by repeating a [ViewActions.swipeUp] for a 20 times.
  */
@@ -78,6 +102,15 @@ fun Matcher<View>.scrollUp() {
     Espresso.onView(this).perform(ViewActions.swipeUp())
     swipes++
   } while (swipes < 30)
+}
+
+/**
+ * Extension function which clicks on ViewHolder at the specific [position] on a currently matched RecyclerView.
+ *
+ * @param position of the item in the [RecyclerView]
+ */
+fun <VH : RecyclerView.ViewHolder> Matcher<View>.clickOnPosition(position: Int) {
+  onView(this).perform(RecyclerViewActions.actionOnItemAtPosition<VH>(position, ViewActions.click()))
 }
 
 /**
@@ -93,22 +126,6 @@ infix fun Matcher<View>.selectListItemByText(textMatcher: () -> Matcher<Any>): V
  */
 fun waitFor(sleepDuration: Long = 5.seconds) {
   Thread.sleep(sleepDuration)
-}
-
-/**
- * Extension function which scrolls a currently matched RecyclerView.
- */
-fun <VH : RecyclerView.ViewHolder> Matcher<View>.scrollToPosition(position: Int) {
-  onView(this).perform(RecyclerViewActions.scrollToPosition<VH>(position))
-}
-
-/**
- * Extension function which clicks on ViewHolder at the specific [position] on a currently matched RecyclerView.
- *
- * @param position of the item in the [RecyclerView]
- */
-fun <VH : RecyclerView.ViewHolder> Matcher<View>.clickOnPosition(position: Int) {
-  onView(this).perform(RecyclerViewActions.actionOnItemAtPosition<VH>(position, ViewActions.click()))
 }
 
 /**

@@ -5,7 +5,7 @@ import de.codecentric.androidtestktx.espresso.EspressoRobot
 import de.codecentric.androidtestktx.espresso.MockableTestRule
 import de.codecentric.androidtestktx.espresso.extensions.*
 
-fun withMainEspressoRobot(fn: MainUIAutomatorRobot.() -> Unit) = MainUIAutomatorRobot().apply { fn() }
+fun withMainEspressoRobot(fn: MainEspressoRobot.() -> Unit) = MainEspressoRobot().apply { fn() }
 
 infix fun MainEspressoRobot.andThen(fn: MainEspressoRobot.() -> Unit): MainEspressoRobot {
   fn()
@@ -18,8 +18,8 @@ infix fun MainEspressoRobot.verifyThat(fn: MainEspressoRobotResult.() -> Unit) {
 }
 
 class MainEspressoRobot : EspressoRobot<MainActivity>(MockableTestRule(MainActivity::class.java), true) {
-  fun openList() {
-    click on button(R.id.activityMainBtnOpenList)
+  fun openScrollScreen() {
+    click on button(R.id.activityMainBtnOpenScroll)
   }
 
   fun inputText(inputText: String = INPUT_TEXT) {
@@ -32,6 +32,10 @@ class MainEspressoRobot : EspressoRobot<MainActivity>(MockableTestRule(MainActiv
 
   fun clearText() {
     clearText from text(R.id.activityMainEditText)
+  }
+
+  fun scrollToTheTextOnTheBottom() {
+    scrollTo(R.id.itemToScrollTo)
   }
 }
 
@@ -59,5 +63,9 @@ class MainEspressoRobotResult {
   fun textIsClearedInTheInputField() {
     val filledEditText = viewById(R.id.activityMainEditText)
     filledEditText verifyThat { textFieldIsEmpty() }
+  }
+
+  fun textOnTheBottomIsVisible(){
+    viewById(R.id.itemToScrollTo) verifyThat { itIsCompletelyDisplayed() }
   }
 }

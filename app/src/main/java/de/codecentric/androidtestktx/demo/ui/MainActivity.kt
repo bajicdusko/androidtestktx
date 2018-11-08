@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import de.codecentric.androidtestktx.demo.R
-import kotlinx.android.synthetic.main.activity_main.activityMainBtnOpenList as openListBtn
+import kotlinx.android.synthetic.main.activity_main.activityMainBtnOpenScroll as openScrollBtn
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
-    openListBtn.setOnClickListener {
+    openScrollBtn.setOnClickListener {
       startActivity(Intent(this, DemoScrollableActivity::class.java))
     }
   }

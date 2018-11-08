@@ -36,14 +36,14 @@ class KTXEspressoDemo {
   @Test
   fun shouldOpenListScreen() {
     withMainEspressoRobot {
-      openList()
+      openScrollScreen()
     } verifyThat {
       listScreenIsOpened()
     }
   }
 
   @Test
-  fun shouldTypeIntoTheField(){
+  fun shouldTypeIntoTheField() {
     withMainEspressoRobot {
       inputText()
     } verifyThat {
@@ -52,7 +52,7 @@ class KTXEspressoDemo {
   }
 
   @Test
-  fun shouldClearTheTextFromInputField(){
+  fun shouldClearTheTextFromInputField() {
     withMainEspressoRobot {
       inputText()
     } andThen {
@@ -63,13 +63,24 @@ class KTXEspressoDemo {
   }
 
   @Test
-  fun shouldReplaceTheTextInTheInputField(){
+  fun shouldReplaceTheTextInTheInputField() {
     withMainEspressoRobot {
       inputText()
     } andThen {
       replaceTextInField()
     } verifyThat {
       textIsEnteredCorrectly(REPLACE_TEXT)
+    }
+  }
+
+  @Test
+  fun shouldScrollToView() {
+    withMainEspressoRobot {
+      openScrollScreen()
+    } andThen {
+      scrollToTheTextOnTheBottom()
+    } verifyThat {
+      textOnTheBottomIsVisible()
     }
   }
 

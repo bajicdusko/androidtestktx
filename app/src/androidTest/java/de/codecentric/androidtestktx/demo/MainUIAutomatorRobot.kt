@@ -19,8 +19,8 @@ infix fun MainUIAutomatorRobot.verifyThat(fn: MainUIAutomatorRobotResult.() -> U
 }
 
 class MainUIAutomatorRobot : UIAutomatorRobot<MainActivity>(MainActivity::class, true) {
-  fun openList() {
-    click on button(R.id.activityMainBtnOpenList)
+  fun openScrollScreen() {
+    click on button(R.id.activityMainBtnOpenScroll)
   }
 
   fun inputText(inputText: String = INPUT_TEXT) {
@@ -33,6 +33,10 @@ class MainUIAutomatorRobot : UIAutomatorRobot<MainActivity>(MainActivity::class,
 
   fun clearText() {
     clearText from text(R.id.activityMainEditText)
+  }
+
+  fun scrollToTheTextOnTheBottom() {
+    scrollTo(R.id.itemToScrollTo)
   }
 }
 
@@ -60,5 +64,9 @@ class MainUIAutomatorRobotResult {
   fun textIsClearedInTheInputField() {
     val filledEditText = viewById(R.id.activityMainEditText)
     filledEditText verifyThat { textFieldIsEmpty() }
+  }
+
+  fun textOnTheBottomIsVisible(){
+    viewById(R.id.itemToScrollTo) verifyThat { itIsDisplayed() }
   }
 }

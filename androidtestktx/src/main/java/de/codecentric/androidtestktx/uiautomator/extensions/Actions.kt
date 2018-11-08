@@ -3,11 +3,8 @@
 package de.codecentric.androidtestktx.uiautomator.extensions
 
 import android.Manifest.permission
-import androidx.test.uiautomator.BySelector
-import androidx.test.uiautomator.UiDevice
-import androidx.test.uiautomator.UiObject
-import androidx.test.uiautomator.UiObjectNotFoundException
-import androidx.test.uiautomator.Until
+import androidx.annotation.IdRes
+import androidx.test.uiautomator.*
 import de.codecentric.androidtestktx.common.appContext
 import de.codecentric.androidtestktx.common.instrumentation
 import de.codecentric.androidtestktx.common.originalPackageName
@@ -80,6 +77,23 @@ fun UiDevice.scrollDown() {
   val middleOfTheScreenVertically = displayHeight / 2
   drag(middleOfTheScreenHorizontally, middleOfTheScreenVertically, middleOfTheScreenHorizontally, displayHeight, 100)
 }
+
+/**
+ * Scrolls the content on the screen until the [uiObject] isn't visible.
+ */
+fun scrollTo(uiObject: UiObject) {
+  UiScrollable(UiSelector().scrollable(true)).scrollIntoView(uiObject)
+}
+
+/**
+ * Scrolls the content on the screen until the UiObject with [viewId] isn't visible.
+ */
+fun scrollTo(@IdRes viewId: Int) = scrollTo(viewById(viewId))
+
+/**
+ * Scrolls the content on the screen until the UiObject with [text] isn't visible.
+ */
+fun scrollTo(text: String) = scrollTo(viewByText(text))
 
 /**
  * Customized [UiObject.swipeLeft] function to look a bit cleaner in code

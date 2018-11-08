@@ -24,6 +24,11 @@ fun DataInteraction.isSelected(): ViewInteraction = check(ViewAssertions.matches
 fun itIsDisplayed(): ViewAssertion = ViewAssertions.matches(ViewMatchers.isDisplayed())
 
 /**
+ * Sugar syntax for [ViewMatchers.isCompletelyDisplayed]
+ */
+fun itIsCompletelyDisplayed(): ViewAssertion = ViewAssertions.matches(ViewMatchers.isCompletelyDisplayed())
+
+/**
  * [ViewAssertions.doesNotExist] sugar.
  */
 fun isNotDisplayed(): ViewAssertion = ViewAssertions.doesNotExist()
